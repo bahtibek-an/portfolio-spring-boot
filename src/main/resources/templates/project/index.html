@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+  <title>FullStack Developer</title>
+  <meta name="viewport"
+        content="width=device-width, userEntity-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <link rel="stylesheet" href="https://unpkg.com/flowbite@1.5.1/dist/flowbite.min.css" />
+  <link rel="stylesheet" href="" th:href="@{/css/style.css}" />
+</head>
+<body>
+<div class="wrapper">
+  <div>
+    <header th:insert="layouts/header :: header"> </header>
+    <main class="flex justify-center container mx-auto">
+      <div class="projects"
+        style="width: 800px;"
+      >
+        <div class="border rounded-lg mt-10 p-4"
+             th:each="project : ${projects}"
+        >
+          <div class="project-item">
+            <div class="project-header">
+              <div class="header-link">
+                <a th:href="'/project/' + ${project.id}" class="underline flex">
+                  <h1 class="text-2xl font-bold" th:text="${project.id} + '.&nbsp;'"></h1>
+                  <h1 class="text-2xl font-bold" th:text="${project.title}"></h1>
+                </a>
+              </div>
+
+              <div class="mt-3">
+                <a
+                    class="text-2xl font-semibold underline"
+                    th:href="${project.link}"
+                    th:text="${project.link}"
+                ></a>
+              </div>
+
+              <div class="mt-4 flex"><strong>Created by:&nbsp;</strong><h3 th:text="${project.user.username}"></h3></div>
+            </div>
+
+            <div class="mt-6">
+              <p th:text="${project.description}"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div th:insert="layouts/footer :: footer"> </div>
+  </div>
+</div>
+<script src="https://unpkg.com/flowbite@1.5.1/dist/flowbite.js"></script>
+</body>
+</html>
