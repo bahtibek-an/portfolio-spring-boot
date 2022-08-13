@@ -61,6 +61,13 @@ public class ProjectService {
     }
 
     public Optional<ProjectEntity> updateProject (ProjectEntity entity, Long id){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username = ((UserDetails)principal).getUsername();
+
+        UserEntity user = userRepository.findByUsername(username);
+        UserEntity userEntity = userRepository.findById(user.getId()).get();
+        entity.setUser(userEntity);
+
         return projectRepository.findById(id)
                 .map(ProjectEntity -> {
                     return projectRepository.save(entity);
