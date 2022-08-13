@@ -54,7 +54,7 @@ public class ProjectController {
     @PostMapping("/projects/admin/{id}/edit")
     public String updateProject(ProjectEntity entity, @PathVariable(value = "id") Long id) {
         projectService.updateProject(entity, id);
-        return "project/admin";
+        return "redirect:/projects/admin";
     }
 
     @GetMapping("projects/new")
